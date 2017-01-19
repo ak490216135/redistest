@@ -14,22 +14,26 @@
 		$data[] = $return;
 	}
 ?>
-<a href="./add.php">添加</a> | <a href="./flush.php">清空</a>
-<hr/>
+<?php include('./head.php'); ?>
 <?php if(empty($data)){echo '数据为空';}else{ ?>
+操作 ||| ID | 邮箱 | 密码
 <?php foreach($data as $value){ ?>
 <p>
 	<a href="./update.php?uid=<?=$value['uid']?>">修改</a>
 	|
 	<a href="./del.php?uid=<?=$value['uid']?>">删除</a>
+	<?php if( !empty($_SESSION['uid']) AND ($_SESSION['uid'] != $value['uid']) ){?>
+	|
+	<a href="./focus.php?uid=<?=$_SESSION['uid']?>&fid=<?=$value['uid']?>">关注</a>
+	<?php } ?>
 	|||
 	<span>
 		<?=$value['uid']?>
 	</span>
 	|
-	<?=$value['name']?>
+	<?=$value['email']?>
 	|
-	<?=$value['age']?>
+	<?=$value['password']?>
 </p>
 <?php } ?>
 <hr/>
